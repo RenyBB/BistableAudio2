@@ -9,7 +9,10 @@
   </head>
   <body></body>
   <script>
-    const jsPsych = initJsPsych();
+    const jsPsych = initJsPsych(
+     on_finish: function () {
+       //jsPsych.data.displayData();
+    });
 
     const preload = {
       type: jsPsychPreload
