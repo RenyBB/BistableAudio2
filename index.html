@@ -25,7 +25,7 @@
     const preload = {
       type: jsPsychPreload,
       audio: [stim_path + "bistableauditorystimulus.mp3", stim_path + "bistableauditorystimulus_experience1.mp3", stim_path + "bistableauditorystimulus_experience2.mp3"  ] 
-    }
+    };
 
     const instructions = {
             type: jsPsychInstructions,
@@ -40,19 +40,52 @@
 
     
     
-     const audio_experience1 = {
-      type: jsPsychAudioKeyboardResponse,
+     const audio_experience1_prompt = {
+      type: jsPsychHtmlButtonResponse,
+      stimulus: [`One way to experience the tune is as an alterating sequence of two tones: 'ABA-ABA-ABA'`],
+      choices: ['Play'],
+      post_trial_gap: 500
+    };
+
+    const audio_experience1 = {
+      type: jsPsychAudioButtonResponse,
       stimulus: [stim_path + "bistableauditorystimulus_experience1.mp3"],
-      prompt: [`One way to experience the tune is as an alterating sequence of two tones: ABA-ABA-ABA'`],
-      choices: ['Continue'],
+      choices: ['Continue', 'Repeat'],
+    };
+    
+    var loop_node_audio_experience1 = {
+    timeline: [audio_experience2],
+    loop_function: function(data){
+        if(jsPsych.data.get().last(1).values()[0].response==1){
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    const audio_experience2 = {
-      type: jsPsychAudioKeyboardResponse,
-      stimulus: [stim_path + "bistableauditorystimulus_experience2.mp3"],
-      prompt: [`The other way to experience the tune is as two seperate sequences played on top of each other: 'A-A-A' and 'B---B---B'`], 
-      choices: ['Continue'],
+    
+    const audio_experience2_prompt = {
+      type: jsPsychHtmlButtonResponse,
+      stimulus:[`The other way to experience the tune is as two seperate sequences played on top of each other: 'A-A-A' and 'B---B---B'`],
+      choices: ['Play'],
+      post_trial_gap: 500
     };
+    
+    const audio_experience2 = {
+      type: jsPsychAudioButtonResponse,
+      stimulus: [stim_path + "bistableauditorystimulus_experience2.mp3"],
+      choices: ['Continue', 'Repeat'],
+    };
+    
+    var loop_node_audio_experience2 = {
+    timeline: [audio_experience2],
+    loop_function: function(data){
+        if(jsPsych.data.get().last(1).values()[0].response==1){
+            return true;
+        } else {
+            return false;
+        }
+    }
 
      const instructions2 = {
             type: jsPsychInstructions,
@@ -64,7 +97,7 @@
             //css_classes: ['instr']
         };
     
-    var Stim_Prompt = {
+    const Stim_Prompt = {
     type: jsPsychHtmlButtonResponse,
     stimulus: 'The tune will play shortly after you press Play',
     choices: ['Play'],
@@ -82,7 +115,10 @@
       show_counter: true
     };
 
-    jsPsych.run([preload, instructions, audio_experience1, audio_experience2, instructions2, Stim_Prompt, audio_bistable])
+    const predominant_experience = {};
+    
+    
+    jsPsych.run([preload, instructions, audio_experience1_prompt, audio_experience1, loop_node_audio_experience1, audio_experience2_prompt, audio_experience2, loop_node_audio_experience2, instructions2, Stim_Prompt, audio_bistable])
 
 
   </script>
