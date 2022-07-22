@@ -123,7 +123,7 @@
       
     const bistable_audio_timeline = [audio_instructions, audio_experience1_prompt, audio_experience1, loop_node_audio_experience1, audio_experience2_prompt, audio_experience2, loop_node_audio_experience2, audio_instructions2, Stim_Prompt, audio_bistable];
     
-    const videoo_instructions = {
+   /* const video_instructions = {
             type: jsPsychInstructions,
             pages: [
                  `<p>In this task you will watch to a video of a spinning dancer. The video can be perceived in two different ways.</p>
@@ -133,7 +133,7 @@
             button_label_next: ['Continue']
             //css_classes: ['instr']
         }
-    
+    */
     
     const video_clockwise = {
       type: jsPsychVideoButtonResponse,
@@ -169,7 +169,7 @@
       show_counter: true
     }
     
-   const bistable_video_timeline = [videoo_instructions, video_clockwise, video_counterclockwise, video_bistable];
+   const bistable_video_timeline = [video_clockwise, video_counterclockwise, video_bistable];
   
     
      timeline.push(preload,bistable_video_timeline, bistable_audio_timeline)
