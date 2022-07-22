@@ -27,7 +27,7 @@
       audio: [stim_path + "bistableauditorystimulus.mp3", stim_path + "bistableauditorystimulus_experience1.mp3", stim_path + "bistableauditorystimulus_experience2.mp3"  ] 
     };
 
-    const instructions = {
+    const audio_instructions = {
             type: jsPsychInstructions,
             pages: [
                  `<p>In this task you will listen to a tune.The tune can be perceived in two different ways.</p>
@@ -89,7 +89,7 @@
       }
     };  
 
-     const instructions2 = {
+     const audio_instructions2 = {
             type: jsPsychInstructions,
             pages: [
                  `<p> You will now listen to the tune, and your taks is to press the spacebar on your keyboar every time you experience a switch in how you perceive the tune.</p>`],
@@ -118,12 +118,32 @@
     };
 
     const predominant_experience = {};
-    
-    
+      
     const bistable_audio_timeline = [audio_instructions, audio_experience1_prompt, audio_experience1, loop_node_audio_experience1, audio_experience2_prompt, audio_experience2, loop_node_audio_experience2, audio_instructions2, Stim_Prompt, audio_bistable];
     timeline.push(preload, bistable_audio_timeline)
+    
+    
+    
+    
+        const videoo_instructions = {
+            type: jsPsychInstructions,
+            pages: [
+                 `<p>In this task you will watch to a video of a spinning dancer. The video can be perceived in two different ways.</p>
+                  <p> Your task is to try to switch between the two different experiences.</p>`],
+            show_clickable_nav: true,
+            allow_backward: false,
+            button_label_next: ['Continue']
+            //css_classes: ['instr']
+        }
+    
+    
+    
+    
+    
     jsPsych.run(timeline)
 
 
+    
+    
   </script>
 </html>
