@@ -54,14 +54,15 @@
     };
     
     var loop_node_audio_experience1 = {
-    timeline: [audio_experience2],
+    timeline: [audio_experience1],
     loop_function: function(data){
         if(jsPsych.data.get().last(1).values()[0].response==1){
             return true;
         } else {
             return false;
         }
-    }
+      }
+    };
 
     
     const audio_experience2_prompt = {
@@ -85,7 +86,8 @@
         } else {
             return false;
         }
-    }
+      }
+    };  
 
      const instructions2 = {
             type: jsPsychInstructions,
