@@ -3,7 +3,10 @@
   <head> 
     <script src="https://unpkg.com/jspsych"></script>
     <script src="https://unpkg.com/@jspsych/plugin-preload"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-instructions"></script>
     <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-button-response"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-audio-button-response"></script>
     <script src="plugin-audio-keyboard-response.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/jspsych/css/jspsych.css">
   </head>
@@ -16,27 +19,70 @@
     }
   });
 
+    
+    var stim_path = [];
+    
     const preload = {
-      type: jsPsychPreload
+      type: jsPsychPreload,
+      audio: [stim_path + "bistableauditorystimulus.mp3", stim_path + "bistableauditorystimulus_experience1.mp3", stim_path + "bistableauditorystimulus_experience2.mp3"  ] 
     }
 
-    const before_audio = {
-      type: jsPsychHtmlKeyboardResponse,
-      stimulus: 'Need to interact before audio can play. Press the spacebar.',
-      choices: [' ']
-    }
+    const instructions = {
+            type: jsPsychInstructions,
+            pages: [
+                 `<p>In this task you will listen to a tune.The tune can be perceived in two different ways.</p>
+    <p> Your task is to try to switch between the two different experiences.</p>`],
+            show_clickable_nav: true,
+            allow_backward: false,
+            button_label_next: ['Continue']
+            //css_classes: ['instr']
+        }
 
-    const audio_trial = {
+    
+    
+     const audio_experience1 = {
       type: jsPsychAudioKeyboardResponse,
-      stimulus: 'bistableauditorystimulus.mp3',
-      prompt: 'Press the spacebar if the audio changes.',
+      stimulus: [stim_path + "bistableauditorystimulus_experience1.mp3"],
+      prompt: [`One way to experience the tune is as an alterating sequence of two tones: ABA-ABA-ABA'`],
+      choices: ['Continue'],
+    }
+
+    const audio_experience2 = {
+      type: jsPsychAudioKeyboardResponse,
+      stimulus: [stim_path + "bistableauditorystimulus_experience2.mp3"],
+      prompt: [`The other way to experience the tune is as two seperate sequences played on top of each other: 'A-A-A' and 'B---B---B'`], 
+      choices: ['Continue'],
+    };
+
+     const instructions2 = {
+            type: jsPsychInstructions,
+            pages: [
+                 `<p> You will now listen to the tune, and your taks is to press the spacebar on your keyboar every time you experience a switch in how you perceive the tune.</p>`],
+            show_clickable_nav: true,
+            allow_backward: false,
+            button_label_next: ['Continue']
+            //css_classes: ['instr']
+        };
+    
+    var Stim_Prompt = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: 'The tune will play shortly after you press Play',
+    choices: ['Play'],
+    post_trial_gap: 500
+    };
+
+    
+    const audio_bistable = {
+      type: jsPsychAudioKeyboardResponse,
+      stimulus: [stim_path + "bistableauditorystimulus.mp3"],
+      prompt: 'Press the spacebar when you experience of the tune changes.',
       choices: [' '],
       max_responses: Infinity,
       trial_ends_after_audio: true,
       show_counter: true
-    }
+    };
 
-    jsPsych.run([preload, before_audio, audio_trial])
+    jsPsych.run([preload, instructions, audio_experience1, audio_experience2, instructions2, Stim_Prompt, audio_bistable])
 
 
   </script>
