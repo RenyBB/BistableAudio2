@@ -24,12 +24,12 @@
     var timeline = [];    
     var stim_path = [];
     
-    const preload = {
+    var preload = {
       type: jsPsychPreload,
       audio: [stim_path + "bistableauditorystimulus.mp3", stim_path + "bistableauditorystimulus_experience1.mp3", stim_path + "bistableauditorystimulus_experience2.mp3"  ] 
     };
 
-    const audio_instructions = {
+    var audio_instructions = {
             type: jsPsychInstructions,
             pages: [
                  `<p>In this task you will listen to a tune.The tune can be perceived in two different ways.</p>
@@ -42,14 +42,14 @@
 
     
     
-     const audio_experience1_prompt = {
+     var audio_experience1_prompt = {
       type: jsPsychHtmlButtonResponse,
       stimulus: [`One way to experience the tune is as an alterating sequence of two tones: 'ABA-ABA-ABA'`],
       choices: ['Play'],
       post_trial_gap: 500
     };
 
-    const audio_experience1 = {
+    var audio_experience1 = {
       type: jsPsychAudioButtonResponse,
       stimulus: [stim_path + "bistableauditorystimulus_experience1.mp3"],
       choices: ['Continue', 'Repeat'],
@@ -67,14 +67,14 @@
     };
 
     
-    const audio_experience2_prompt = {
+    var audio_experience2_prompt = {
       type: jsPsychHtmlButtonResponse,
       stimulus:[`The other way to experience the tune is as two seperate sequences played on top of each other: 'A-A-A' and 'B---B---B'`],
       choices: ['Play'],
       post_trial_gap: 500
     };
     
-    const audio_experience2 = {
+    var audio_experience2 = {
       type: jsPsychAudioButtonResponse,
       stimulus: [stim_path + "bistableauditorystimulus_experience2.mp3"],
       choices: ['Continue', 'Repeat'],
@@ -91,7 +91,7 @@
       }
     };  
 
-     const audio_instructions2 = {
+     var audio_instructions2 = {
             type: jsPsychInstructions,
             pages: [
                  `<p> You will now listen to the tune, and your taks is to press the spacebar on your keyboar every time you experience a switch in how you perceive the tune.</p>`],
@@ -101,7 +101,7 @@
             //css_classes: ['instr']
         };
     
-    const Stim_Prompt = {
+    var Stim_Prompt = {
     type: jsPsychHtmlButtonResponse,
     stimulus: 'The tune will play shortly after you press Play',
     choices: ['Play'],
@@ -109,7 +109,7 @@
     };
 
     
-    const audio_bistable = {
+    var audio_bistable = {
       type: jsPsychAudioKeyboardResponse,
       stimulus: [stim_path + "bistableauditorystimulus.mp3"],
       prompt: 'Press the spacebar when you experience of the tune changes.',
@@ -119,11 +119,11 @@
       show_counter: true
     };
 
-    const predominant_experience = {};
+    var predominant_experience = {};
       
-    const bistable_audio_timeline = [audio_instructions, audio_experience1_prompt, audio_experience1, loop_node_audio_experience1, audio_experience2_prompt, audio_experience2, loop_node_audio_experience2, audio_instructions2, Stim_Prompt, audio_bistable];
+    var bistable_audio_timeline = [audio_instructions, audio_experience1_prompt, audio_experience1, loop_node_audio_experience1, audio_experience2_prompt, audio_experience2, loop_node_audio_experience2, audio_instructions2, Stim_Prompt, audio_bistable];
     
-   /* const video_instructions = {
+    var video_instructions = {
             type: jsPsychInstructions,
             pages: [
                  `<p>In this task you will watch to a video of a spinning dancer. The video can be perceived in two different ways.</p>
@@ -133,9 +133,9 @@
             button_label_next: ['Continue']
             //css_classes: ['instr']
         }
-    */
+   
     
-    const video_clockwise = {
+    var video_clockwise = {
       type: jsPsychVideoButtonResponse,
       stimulus: ['clockwise_spin.mp4'],
       prompt: 'One way to experience the dancer is spinning clockwise.',
@@ -146,7 +146,7 @@
       response_ends_trial: true
     }
     
-    const video_counterclockwise = {
+    var video_counterclockwise = {
       type: jsPsychVideoButtonResponse,
       stimulus: ['counterclockwise_spin.mp4'],
       prompt: 'The other way to experience the dancer is spinning counterclockwise.',
@@ -157,7 +157,7 @@
       response_ends_trial: true
     }  
         
-    const video_bistable = {
+    var video_bistable = {
       type: jsPsychVideoKeyboardResponse,
       stimulus: ['Spinning_Dancer.webm'],
       prompt: 'Press the spacebar if you experience a change in the direction in which the dancer spins.',
@@ -169,12 +169,12 @@
       show_counter: true
     }
     
-   const bistable_video_timeline = [video_clockwise, video_counterclockwise, video_bistable];
+   var bistable_video_timeline = [video_clockwise, video_counterclockwise, video_bistable];
   
     
-     timeline.push(preload,bistable_video_timeline, bistable_audio_timeline)
+   //  timeline.push(preload,bistable_video_timeline, bistable_audio_timeline)
     
-    jsPsych.run(timeline)
+    jsPsych.run(video_clockwise, video_counterclockwise)
 
 
     
