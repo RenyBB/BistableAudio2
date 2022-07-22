@@ -8,6 +8,7 @@
     <script src="https://unpkg.com/@jspsych/plugin-html-button-response"></script>
     <script src="https://unpkg.com/@jspsych/plugin-audio-button-response"></script>
     <script src="plugin-audio-keyboard-response.js"></script>
+    <script src="plugin-video-keyboard-response.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/jspsych/css/jspsych.css">
   </head>
   <body></body>
@@ -137,7 +138,17 @@
         }
     
     
-    
+    const video_trial = {
+      type: jsPsychVideoKeyboardResponse,
+      stimulus: ['Spinning_Dancer.webm'],
+      prompt: 'Press the spacebar if you experience a change in the direction in which the dancer spins.',
+      choices: [' '],
+      max_responses: Infinity,
+      loop: true,
+      controls: false,
+      trial_duration: 30000,
+      show_counter: true
+    }
     
     
     jsPsych.run(timeline)
