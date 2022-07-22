@@ -123,58 +123,12 @@
       
     var bistable_audio_timeline = [audio_instructions, audio_experience1_prompt, audio_experience1, loop_node_audio_experience1, audio_experience2_prompt, audio_experience2, loop_node_audio_experience2, audio_instructions2, Stim_Prompt, audio_bistable];
     
-    var video_instructions = {
-            type: jsPsychInstructions,
-            pages: [
-                 `<p>In this task you will watch to a video of a spinning dancer. The video can be perceived in two different ways.</p>
-                  <p> Your task is to try to switch between the two different experiences.</p>`],
-            show_clickable_nav: true,
-            allow_backward: false,
-            button_label_next: ['Continue']
-            //css_classes: ['instr']
-        }
    
-    
-    var video_clockwise = {
-      type: jsPsychVideoButtonResponse,
-      stimulus: ['clockwise_spin.mp4'],
-      prompt: 'One way to experience the dancer is spinning clockwise.',
-      choices: ['Continue'],
-      loop: true,
-      controls: false,
-      trial_duration: 30000,
-      response_ends_trial: true
-    }
-    
-    var video_counterclockwise = {
-      type: jsPsychVideoButtonResponse,
-      stimulus: ['counterclockwise_spin.mp4'],
-      prompt: 'The other way to experience the dancer is spinning counterclockwise.',
-      choices: ['Continue'],
-      loop: true,
-      controls: false,
-      trial_duration: 30000,
-      response_ends_trial: true
-    }  
-        
-    var video_bistable = {
-      type: jsPsychVideoKeyboardResponse,
-      stimulus: ['Spinning_Dancer.webm'],
-      prompt: 'Press the spacebar if you experience a change in the direction in which the dancer spins.',
-      choices: [' '],
-      max_responses: Infinity,
-      loop: true,
-      controls: false,
-      trial_duration: 30000,
-      show_counter: true
-    }
-    
-   var bistable_video_timeline = [video_clockwise, video_counterclockwise, video_bistable];
   
     
-   //  timeline.push(preload,bistable_video_timeline, bistable_audio_timeline)
+   timeline.push(preload, bistable_audio_timeline)
     
-    jsPsych.run(video_clockwise, video_counterclockwise)
+    jsPsych.run(timeline)
 
 
     
