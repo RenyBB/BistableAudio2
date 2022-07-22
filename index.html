@@ -19,7 +19,7 @@
     }
   });
 
-    
+    var timeline = [];    
     var stim_path = [];
     
     const preload = {
@@ -120,7 +120,9 @@
     const predominant_experience = {};
     
     
-    jsPsych.run([preload, instructions, audio_experience1_prompt, audio_experience1, loop_node_audio_experience1, audio_experience2_prompt, audio_experience2, loop_node_audio_experience2, instructions2, Stim_Prompt, audio_bistable])
+    const bistable_audio_timeline = [audio_instructions, audio_experience1_prompt, audio_experience1, loop_node_audio_experience1, audio_experience2_prompt, audio_experience2, loop_node_audio_experience2, audio_instructions2, Stim_Prompt, audio_bistable];
+    timeline.push(preload, bistable_audio_timeline)
+    jsPsych.run(timeline)
 
 
   </script>
